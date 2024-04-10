@@ -95,6 +95,7 @@
 		942E10D12BC63FDF001E29DE /* SwiiftUISpotify */ = {
 			isa = PBXGroup;
 			children = (
+				942E10FE2BC64093001E29DE /* Shared */,
 				942E10D22BC63FDF001E29DE /* SwiiftUISpotifyApp.swift */,
 				942E10D42BC63FDF001E29DE /* ContentView.swift */,
 				942E10D62BC63FE1001E29DE /* Assets.xcassets */,
@@ -127,6 +128,13 @@
 				942E10F02BC63FE1001E29DE /* SwiiftUISpotifyUITestsLaunchTests.swift */,
 			);
 			path = SwiiftUISpotifyUITests;
+			sourceTree = "<group>";
+		};
+		942E10FE2BC64093001E29DE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,6 +225,9 @@
 				Base,
 			);
 			mainGroup = 942E10C62BC63FDF001E29DE;
+			packageReferences = (
+				942E10FD2BC6404F001E29DE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 942E10D02BC63FDF001E29DE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -617,6 +628,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		942E10FD2BC6404F001E29DE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 942E10C72BC63FDF001E29DE /* Project object */;
 }
