@@ -6,13 +6,31 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ImageLoderView: View {
+    let urlString: String = Consants.randomImage
+    let reszingMode: ContentMode = .fill
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Rectangle()
+            .opacity(0.001)
+            .overlay {
+                WebImage(url: URL(string: urlString ))
+                    .resizable()
+                    .indicator(.activity )
+                    .aspectRatio(contentMode: .fill)
+                    .allowsHitTesting(false)
+            }
+            .clipped()
+        
+       
     }
 }
 
 #Preview {
     ImageLoderView()
+        .cornerRadius(30)
+        .padding(40)
+        .padding(.vertical, 60)
 }
