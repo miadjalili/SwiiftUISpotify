@@ -6,48 +6,52 @@
 //
 
 import SwiftUI
+import SwiftfulUI
 
 struct SpotifyHomeView: View {
     
     @State private var currentUser: User? = nil
     @State private var selectedCategory: Category? = nil
+    @State private var products: [Product] = []
     var body: some View {
         ZStack{
-            Color.spotifyBlack.ignoresSafeArea()
+            Color.spotifyBlack
+                .ignoresSafeArea()
+            
             ScrollView(.vertical) {
-                LazyVStack(spacing: 1, pinnedViews: .sectionHeaders, content: {
+                LazyVStack(spacing: 1, pinnedViews: .sectionHeaders) {
                     Section {
-                        ForEach(1..<10) { _ in
-                            Rectangle()
-                                .fill(.red)
-                                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/,height: 100)
+                        VStack {
+                            recentSection
                         }
+                        .padding(.horizontal,16)
                     } header: {
                         header
                     }
-
-                   
-                })
+                }
                 
             }
             .scrollIndicators(.hidden)
             .clipped()
             
         }
-       
+        
         .task {
             await getData()
         }
         .toolbar(.hidden,for: .navigationBar)
     }
+}
+
+extension SpotifyHomeView {
     
     private func getData() async {
         do
         {
             currentUser = try await DatabaseHelper().getUsers().first
-           
-        }catch{
-            
+            products = try await Array(DatabaseHelper().getProducts().prefix(8))
+        } catch {
+            //
         }
     }
     
@@ -58,11 +62,10 @@ struct SpotifyHomeView: View {
             {
                 if let currentUser {
                     ImageLoderView(urlString: currentUser.image)
-                       
                         .background(.spotifyWhite)
                         .clipShape(Circle())
                         .onTapGesture {
-                            
+                            //
                         }
                 }
             }
@@ -87,6 +90,17 @@ struct SpotifyHomeView: View {
         .padding(.leading,8)
         .frame(maxWidth: .infinity)
         .background(.spotifyBlack)
+    }
+    
+    
+    
+    private var recentSection: some View {
+        
+        NonLazyVGrid(columns: 2, alignment: .center, spacing: 10, items: products) { product in
+            if let product {
+                SpotifyRecentsCell(imageName: product.firstImage, title: product.title)
+            }
+        }
     }
 }
 

@@ -8,9 +8,6 @@
 import Foundation
 
 
-
-
-
 struct UserArray: Codable {
     let users: [User]
     let total, skip, limit: Int
